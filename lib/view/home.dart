@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Calls',
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.heat_pump_rounded),
