@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controller/home_controller.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
+class UserProfile extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Text('this is user profile');
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text('this is userProfile'),
+        ),
+      ),
+    );
   }
 }

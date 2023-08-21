@@ -20,7 +20,7 @@ appRoutes() => [
       ),
       GetPage(
         name: Routes.notification,
-        page: () => Notification(),
+        page: () => Notifications(),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),
       ),

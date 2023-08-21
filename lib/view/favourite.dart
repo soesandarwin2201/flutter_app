@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controller/home_controller.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
+class Favourite extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    return Text("this is favourite page");
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text('this is Favourite'),
+        ),
+      ),
+    );
   }
 }
