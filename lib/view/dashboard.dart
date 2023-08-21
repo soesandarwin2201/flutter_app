@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter_app/view/favourite.dart';
 import 'package:flutter_app/view/home.dart';
+import 'package:flutter_app/view/login.dart';
 import 'package:flutter_app/view/noti.dart';
 import 'package:flutter_app/view/user_profile.dart';
 
@@ -77,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       HomePage(),
       Favourite(),
       Notifications(),
-      UserProfile()
+      LoginPage(),
     ];
 
     return IndexedStack(
