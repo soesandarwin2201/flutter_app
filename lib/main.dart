@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/dashboard.dart';
-import 'package:flutter_app/view/home.dart';
 import 'package:get/get.dart';
 
 void main() {

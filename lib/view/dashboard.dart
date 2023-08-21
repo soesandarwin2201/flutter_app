@@ -39,21 +39,21 @@ class _MyHomePageState extends State<MyHomePage> {
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-          icon: Icon(Icons.apps),
+          icon: Icon(Icons.home),
           title: Text('Home'),
           activeColor: Colors.green,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.people),
+          icon: Icon(Icons.star),
           title: Text('Users'),
           activeColor: Colors.purpleAccent,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.message),
+          icon: Icon(Icons.notifications),
           title: Text(
             'Messages ',
           ),
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.person),
           title: Text('Settings'),
           activeColor: Colors.blue,
           inactiveColor: _inactiveColor,
