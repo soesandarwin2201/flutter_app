@@ -4,6 +4,7 @@ import 'package:flutter_app/view/favourite.dart';
 import 'package:flutter_app/view/home.dart';
 import 'package:flutter_app/view/login.dart';
 import 'package:flutter_app/view/noti.dart';
+import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
 
 import '../utlis/custom_animated_bottom_bar.dart';
@@ -78,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
       HomePage(),
       Favourite(),
       Notifications(),
-      LoginPage(),
+      SignUpPage()
     ];
 
     return IndexedStack(

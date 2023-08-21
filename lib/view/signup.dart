@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 
 import '../contants/routes.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 340.0,
+                  height: 320.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15),
@@ -150,15 +150,70 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             children: [
                               TextSpan(
-                                text: " sign up",
+                                text: " Sign In",
                                 style: const TextStyle(
                                   color: Colors.blue,
                                   fontSize: 18,
                                 ),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Get.toNamed(Routes.signup),
+                                  ..onTap = () => Get.toNamed(Routes.login),
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Center(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "Create the account with following method,",
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('images/google.png'),
+                                    radius: 20,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('images/facebook.jpg'),
+                                    radius: 30,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('images/twitter.png'),
+                                    radius: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

@@ -1,11 +1,20 @@
 import 'package:flutter_app/contants/routes.dart';
+import 'package:flutter_app/view/dashboard.dart';
 import 'package:flutter_app/view/favourite.dart';
 import 'package:flutter_app/view/home.dart';
+import 'package:flutter_app/view/login.dart';
 import 'package:flutter_app/view/noti.dart';
+import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
 import 'package:get/get.dart';
 
 appRoutes() => [
+      GetPage(
+        name: Routes.dashboard,
+        page: () => MyHomePage(),
+        transition: Transition.native,
+        transitionDuration: const Duration(microseconds: 400),
+      ),
       GetPage(
         name: Routes.home,
         page: () => HomePage(),
@@ -27,6 +36,18 @@ appRoutes() => [
       GetPage(
         name: Routes.user,
         page: () => UserProfile(),
+        transition: Transition.native,
+        transitionDuration: const Duration(microseconds: 400),
+      ),
+      GetPage(
+        name: Routes.login,
+        page: () => LoginPage(),
+        transition: Transition.native,
+        transitionDuration: const Duration(microseconds: 400),
+      ),
+      GetPage(
+        name: Routes.signup,
+        page: () => SignUpPage(),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),
       ),
