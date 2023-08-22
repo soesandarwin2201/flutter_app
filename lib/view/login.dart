@@ -39,6 +39,19 @@ class _LoginPageState extends State<LoginPage> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   title: GestureDetector(
+        //     onTap: () {
+        //       Get.toNamed(Routes.dashboard);
+        //     },
+        //     child: Icon(
+        //       Icons.arrow_back_ios_rounded,
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        //   backgroundColor: Colors.green[200],
+        // ),
         body: Container(
           height: height,
           decoration: BoxDecoration(

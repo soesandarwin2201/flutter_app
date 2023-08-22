@@ -11,6 +11,7 @@ class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   get user => _user;
+  bool get isLoggedIn => _user.value != null;
 
   @override
   void onReady() {

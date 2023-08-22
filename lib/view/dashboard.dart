@@ -6,7 +6,9 @@ import 'package:flutter_app/view/login.dart';
 import 'package:flutter_app/view/noti.dart';
 import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
+import 'package:get/get.dart';
 
+import '../controller/auth_controller.dart';
 import '../utlis/custom_animated_bottom_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,6 +17,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final authController = Get.find<AuthController>();
   int _currentIndex = 0;
   bool isLoggedIn = true;
 
@@ -76,13 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getBody() {
-    bool isLoggedIn = true;
-
     List<Widget> pages = [
       HomePage(),
       Favourite(),
       Notifications(),
-      isLoggedIn ? UserProfile() : LoginPage(),
+      authController.isLoggedIn ? UserProfile() : LoginPage(),
     ];
 
     return IndexedStack(
