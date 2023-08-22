@@ -18,19 +18,6 @@ class _UserProfileState extends State<UserProfile> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: GestureDetector(
-          onTap: () {
-            Get.toNamed(Routes.dashboard);
-          },
-          child: Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.green[200],
-      ),
       body: Column(
         children: [
           Stack(
