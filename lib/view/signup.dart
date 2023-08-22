@@ -71,6 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             hintText: "Your Email",
                             prefixIcon: const Icon(Icons.email),
@@ -111,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             hintText: "Your Password",
@@ -156,7 +158,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             height: 50.0,
                             child: const Center(
                               child: Text(
-                                'Sign in',
+                                'Sign Up',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15.0),
                               ),

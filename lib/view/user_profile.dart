@@ -73,6 +73,28 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
           ),
+          Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              margin: EdgeInsets.only(left: 20.0),
+              width: width * 0.5,
+              height: 50.0,
+              child: GestureDetector(
+                onTap: () {
+                  authController.signout();
+                },
+                child: Center(
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(color: Colors.white, fontSize: 15.0),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

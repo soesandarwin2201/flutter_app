@@ -71,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             hintText: "Your Email",
                             prefixIcon: const Icon(Icons.email),
@@ -111,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             hintText: "Your Password",

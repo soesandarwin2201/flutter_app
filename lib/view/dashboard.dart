@@ -16,6 +16,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
+  bool isLoggedIn = true;
 
   final _inactiveColor = Colors.grey;
   @override
@@ -75,11 +76,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getBody() {
+    bool isLoggedIn = true;
+
     List<Widget> pages = [
       HomePage(),
       Favourite(),
       Notifications(),
-      SignUpPage()
+      isLoggedIn ? UserProfile() : LoginPage(),
     ];
 
     return IndexedStack(

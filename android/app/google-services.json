@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "47831682716",
+    "project_id": "alna-app",
+    "storage_bucket": "alna-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47831682716:android:f5c6548d2656590cf92759",
+        "android_client_info": {
+          "package_name": "com.alna.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47831682716-gi0nrqcrqgboi3t08v6j8iusd67asl6q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb8Sz4GjwZlAy-prVkNJ3Ms6F_0FnU7Mk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47831682716-gi0nrqcrqgboi3t08v6j8iusd67asl6q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
