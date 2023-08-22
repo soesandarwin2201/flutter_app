@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
-import '../controller/home_controller.dart';
+
+import '../contants/routes.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -36,11 +39,8 @@ class _UserProfileState extends State<UserProfile> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text("Username", style: TextStyle(fontSize: 18.0)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text("Username", style: TextStyle(fontSize: 18.0)),
+            child: Text(authController.user.value.email,
+                style: TextStyle(fontSize: 18.0)),
           ),
           SizedBox(
             height: height * 0.06,
@@ -73,6 +73,28 @@ class _UserProfileState extends State<UserProfile> {
                 Text("payment"),
                 Text("user payment"),
               ],
+            ),
+          ),
+          Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              margin: EdgeInsets.only(left: 20.0),
+              width: width * 0.5,
+              height: 50.0,
+              child: GestureDetector(
+                onTap: () {
+                  authController.signout();
+                },
+                child: Center(
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(color: Colors.white, fontSize: 15.0),
+                  ),
+                ),
+              ),
             ),
           ),
         ],

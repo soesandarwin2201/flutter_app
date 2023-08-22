@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
 
 import '../contants/routes.dart';
+import '../ui/widget/loading.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -12,12 +14,44 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final authController = Get.find<AuthController>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void _signUp(BuildContext context, String email, String password,
+      [bool mounted = true]) async {
+    showLoadingDialog(context, "Signing up please wait...");
+
+    authController.register(
+      email,
+      password,
+    );
+
+    // Close the dialog programmatically
+    // We use "mounted" variable to get rid of the "Do not use BuildContexts across async gaps" warning
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: GestureDetector(
+            onTap: () {
+              Get.toNamed(Routes.dashboard);
+            },
+            child: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.green[200],
+        ),
         body: Container(
           height: height,
           decoration: BoxDecoration(
@@ -50,6 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: emailController,
                           decoration: InputDecoration(
                             hintText: "Your Email",
                             prefixIcon: const Icon(Icons.email),
@@ -90,6 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                         child: TextField(
+                          controller: passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             hintText: "Your Password",
@@ -118,7 +154,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         height: 40,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          _signUp(
+                            context,
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                          );
+                        },
                         child: Center(
                           child: Container(
                             decoration: BoxDecoration(
@@ -129,7 +171,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             height: 50.0,
                             child: const Center(
                               child: Text(
-                                'Sign in',
+                                'Sign Up',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15.0),
                               ),
