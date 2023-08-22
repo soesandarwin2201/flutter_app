@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       [bool mounted = true]) async {
     showLoadingDialog(context, "Signing in please wait...");
 
-    await authController.login(
+    authController.login(
       email,
       password,
     );
@@ -139,7 +139,13 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          _signIn(
+                            context,
+                            emailController.text.trim(),
+                            passwordController.text.trim(),
+                          );
+                        },
                         child: Center(
                           child: Container(
                             decoration: BoxDecoration(
