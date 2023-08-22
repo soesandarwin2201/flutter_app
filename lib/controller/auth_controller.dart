@@ -9,6 +9,8 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
 
+  get user => _user;
+
   @override
   void onReady() {
     _user = Rx<User?>(auth.currentUser);
@@ -21,7 +23,7 @@ class AuthController extends GetxController {
       print("Login Page");
       Get.offAll(() => LoginPage());
     } else {
-      Get.offAll(() => UserProfile(email: user.email!));
+      Get.offAll(() => UserProfile());
     }
   }
 

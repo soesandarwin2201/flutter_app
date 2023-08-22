@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
-
 import '../contants/routes.dart';
+import '../ui/widget/loading.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +13,26 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final authController = Get.find<AuthController>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void _signIn(BuildContext context, String email, String password,
+      [bool mounted = true]) async {
+    showLoadingDialog(context, "Signing in please wait...");
+
+    await authController.login(
+      email,
+      password,
+    );
+
+    // Close the dialog programmatically
+    // We use "mounted" variable to get rid of the "Do not use BuildContexts across async gaps" warning
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

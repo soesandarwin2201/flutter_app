@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controller/auth_controller.dart';
 import 'package:get/get.dart';
-import '../controller/home_controller.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -10,6 +10,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -36,11 +37,8 @@ class _UserProfileState extends State<UserProfile> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
-            child: Text("Username", style: TextStyle(fontSize: 18.0)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text("Username", style: TextStyle(fontSize: 18.0)),
+            child: Text(authController.user.value.email,
+                style: TextStyle(fontSize: 18.0)),
           ),
           SizedBox(
             height: height * 0.06,
