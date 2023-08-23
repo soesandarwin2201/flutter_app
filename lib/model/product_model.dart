@@ -2,28 +2,28 @@ class ProductModel {
   static const ID = "id";
   static const IMAGE = "image";
   static const NAME = "name";
-  static const CATEGORY = "category"; // Use uppercase for constant names
+  static const CATEGORY = "category";
   static const PRICE = "price";
-  static const SIZE = "size"; // Use uppercase for constant names
+  static const SIZE = "size";
   static const DETAILS = "details";
   static const INGREDIENTS = "ingredients";
-  static const INGREDIENT1 = "ingredient1"; // Use uppercase for constant names
-  static const INGREDIENT2 = "ingredient2"; // Use uppercase for constant names
-  static const INGREDIENT3 = "ingredient3"; // Use uppercase for constant names
-  static const INGREDIENT4 = "ingredient4"; // Use uppercase for constant names
+  static const INGREDIENT1 = "ingredient1";
+  static const INGREDIENT2 = "ingredient2";
+  static const INGREDIENT3 = "ingredient3";
+  static const INGREDIENT4 = "ingredient4";
 
-  String id;
-  String image;
-  String name;
-  String category;
-  double price; // Use double instead of Int
-  int size;
-  String ingredients;
-  String ingredient1;
-  String ingredient2;
-  String ingredient3;
-  String ingredient4;
-  String details;
+  late String id;
+  late String image;
+  late String name;
+  late String category;
+  late double price;
+  late int size;
+  late String ingredients;
+  late String ingredient1;
+  late String ingredient2;
+  late String ingredient3;
+  late String ingredient4;
+  late String details;
 
   ProductModel({
     required this.id,
