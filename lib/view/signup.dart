@@ -231,11 +231,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    authController.signInWithGoogle();
+                                  },
                                   child: CircleAvatar(
                                     backgroundImage:
                                         AssetImage('images/google.png'),
-                                    radius: 20,
+                                    radius: 30,
                                   ),
                                 ),
                                 GestureDetector(
