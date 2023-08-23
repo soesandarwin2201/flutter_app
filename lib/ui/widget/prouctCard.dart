@@ -60,7 +60,7 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               width: 30,
             ),
-            IconButton(icon: Icon(Icons.favorite), onPressed: () {}),
+            IconButton(icon: Icon(Icons.favorite_rounded), onPressed: () {}),
           ],
         )
       ]),
