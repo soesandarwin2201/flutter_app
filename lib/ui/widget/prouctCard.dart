@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/product_model.dart';
-import 'package:flutter_app/ui/widget/customeText.dart';
+import 'package:flutter_app/utlis/customeText.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
             color: Colors.black,
             weight: FontWeight.bold),
         CustomText(
-            text: "${product.size}",
+            text: product.category,
             size: 18,
             color: Colors.grey,
             weight: FontWeight.w700),

@@ -14,6 +14,7 @@ dependencies:
   google_sign_in: ^6.1.4
   cloud_firestore:
   get: ^4.6.5
+  flutter_svg: 
 
 dev_dependencies:
   flutter_test:
