@@ -26,7 +26,8 @@ class ProductController extends GetxController {
 
         print("Number of products: ${productsList.length}");
         productsList.forEach((product) {
-          print("Product: ${product.name}, Price: ${product.price}");
+          print(
+              "Product: ${product.name}, Price: ${product.price} , Size: ${product.size} , category: ${product.category}, ingreident: ${product.ingredients},${product.ingredient1},${product.ingredient2}, ");
         });
 
         return productsList;

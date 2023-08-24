@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
             color: Colors.black,
             weight: FontWeight.bold),
         CustomText(
-            text: product.category,
+            text: "${product.size}",
             size: 18,
             color: Colors.grey,
             weight: FontWeight.w700),
