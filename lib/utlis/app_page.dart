@@ -1,4 +1,5 @@
 import 'package:flutter_app/contants/routes.dart';
+import 'package:flutter_app/ui/widget/productDeatils.dart';
 import 'package:flutter_app/view/dashboard.dart';
 import 'package:flutter_app/view/favourite.dart';
 import 'package:flutter_app/view/home.dart';
@@ -48,6 +49,12 @@ appRoutes() => [
       GetPage(
         name: Routes.signup,
         page: () => SignUpPage(),
+        transition: Transition.native,
+        transitionDuration: const Duration(microseconds: 400),
+      ),
+      GetPage(
+        name: Routes.details,
+        page: () => ProductDetailPage(),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),
       ),

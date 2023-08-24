@@ -27,9 +27,9 @@ class Products extends StatelessWidget {
           final products = snapshot.data!;
           return GridView.count(
             crossAxisCount: 1,
-            childAspectRatio: .63,
+            childAspectRatio: .66,
             padding: const EdgeInsets.all(10),
-            mainAxisSpacing: 4.0,
+            mainAxisSpacing: 22,
             crossAxisSpacing: 20,
             children: products.map((product) {
               return ProductCard(product: product);

@@ -2,8 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Navbar extends StatelessWidget {
-  const Navbar({super.key});
+import '../ui/theme/theme.dart';
+
+class Navbar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +14,27 @@ class Navbar extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_new_rounded),
-        onPressed: {},
+        icon: Icon(
+          Icons.arrow_back_ios_new_rounded,
+          color: Colors.black,
+          size: 25,
+        ),
+        onPressed: () {
+          // Add your onPressed logic here
+        },
       ),
       actions: <Widget>[
-        IconButton(onPressed: {}, icon: Icon(Icons.shopping_cart))
+        IconButton(
+          onPressed: () {
+            // Add your onPressed logic here
+          },
+          icon: Icon(
+            Icons.shopping_cart,
+            color: Colors.black,
+            size: 25,
+          ),
+        ),
+        SizedBox(width: kDefaultPaddin / 2)
       ],
     );
   }
