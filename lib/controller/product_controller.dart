@@ -14,7 +14,23 @@ class ProductController extends GetxController {
     products.bindStream(getAllProducts());
   }
 
-  Stream<List<ProductModel>> getAllProducts() =>
-      firebaseFirestore.collection(collection).snapshots().map((query) =>
-          query.docs.map((item) => ProductModel.fromMap(item.data())).toList());
+  Stream<List<ProductModel>> getAllProducts() {
+    return firebaseFirestore.collection(collection).snapshots().map(
+      (query) {
+        final productsList = query.docs
+            .map(
+              (item) =>
+                  ProductModel.fromMap(item.data() as Map<String, dynamic>),
+            )
+            .toList();
+
+        print("Number of products: ${productsList.length}");
+        productsList.forEach((product) {
+          print("Product: ${product.name}, Price: ${product.price}");
+        });
+
+        return productsList;
+      },
+    );
+  }
 }

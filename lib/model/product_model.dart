@@ -13,7 +13,7 @@ class ProductModel {
   late String name;
   late String category;
   late String price; // Change this to String
-  late int size;
+  late String size;
   late String ingredients;
   late String details;
 
@@ -30,12 +30,12 @@ class ProductModel {
 
   ProductModel.fromMap(Map<String, dynamic> data) {
     id = data[ID];
-    image = data[IMAGE];
-    name = data[NAME];
-    category = data[CATEGORY];
-    details = data[DETAILS];
-    size = data[SIZE];
-    ingredients = data[INGREDIENTS];
+    image = data[IMAGE] ?? "0";
+    name = data[NAME] ?? "0";
+    category = data[CATEGORY] ?? "0";
+    details = data[DETAILS] ?? "0";
+    size = data[SIZE] ?? "0";
+    ingredients = data[INGREDIENTS] ?? "0";
     price = data[PRICE] ?? "0"; // Initialize with "0" if it's null
   }
 }
