@@ -54,7 +54,9 @@ appRoutes() => [
       ),
       GetPage(
         name: Routes.details,
-        page: () => ProductDetailPage(),
+        page: () => ProductDetailPage(
+          product: null,
+        ),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),
       ),
