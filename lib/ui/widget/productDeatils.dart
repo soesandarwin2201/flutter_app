@@ -1,10 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/product_model.dart';
 import 'package:flutter_app/ui/theme/theme.dart';
+import 'package:flutter_app/ui/widget/details/cartBtn.dart';
 import 'package:flutter_app/ui/widget/details/ingredient.dart';
 import 'package:flutter_app/utlis/appbar.dart';
+
+import 'details/cart.dart';
 
 class ProductDetailPage extends StatelessWidget {
   const ProductDetailPage({super.key, required this.product});
@@ -35,9 +37,24 @@ class ProductDetailPage extends StatelessWidget {
                       topRight: Radius.circular(24),
                     ),
                   ),
-                  child: Column(children: <Widget>[
-                    Ingredientcard(product: product),
-                  ]),
+                  child: Column(
+                    children: <Widget>[
+                      Ingredientcard(product: product),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: kDefaultPaddin),
+                        child: Text(
+                          product.details,
+                          style: TextStyle(height: 1.5),
+                        ),
+                      ),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      CounterWithFavBtn(product: product),
+                      SizedBox(height: kDefaultPaddin / 2),
+                      AddToCart(product: product)
+                    ],
+                  ),
                 ),
               ],
             ),
