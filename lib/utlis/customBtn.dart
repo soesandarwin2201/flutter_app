@@ -7,16 +7,16 @@ class CustomButton extends StatelessWidget {
   final Color txtColor;
   final Color bgColor;
   final Color shadowColor;
-  final Function onTap;
+  final void Function()? onTap; // Change the type here
 
-  const CustomButton(
-      {Key? key,
-      required this.text,
-      required this.txtColor,
-      required this.bgColor,
-      required this.shadowColor,
-      required this.onTap})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    required this.text,
+    required this.txtColor,
+    required this.bgColor,
+    required this.shadowColor,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +27,21 @@ class CustomButton extends StatelessWidget {
         elevation: 2,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: bgColor ?? Colors.black,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: bgColor ?? Colors.black,
+          ),
+          child: Container(
+            margin: EdgeInsets.all(14),
+            alignment: Alignment.center,
+            child: CustomText(
+              text: text,
+              color: txtColor ?? Colors.white,
+              size: 22,
+              weight: FontWeight.normal,
             ),
-            child: Container(
-              margin: EdgeInsets.all(14),
-              alignment: Alignment.center,
-              child: CustomText(
-                text: text,
-                color: txtColor ?? Colors.white,
-                size: 22,
-                weight: FontWeight.normal,
-              ),
-            )),
+          ),
+        ),
       ),
     );
   }
