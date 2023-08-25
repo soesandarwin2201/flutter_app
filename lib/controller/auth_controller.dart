@@ -8,11 +8,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
-  late Rx<User?> _user;
+  late Rx<User?> _user = Rx<User?>(null);
   FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   get user => _user;
-  bool get isLoggedIn => _user.value != null;
+  bool get isLoggedIn => _user.value != null && auth.currentUser != null;
 
   @override
   void onReady() {

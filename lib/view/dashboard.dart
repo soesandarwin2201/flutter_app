@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter_app/utlis/appbar.dart';
 import 'package:flutter_app/view/favourite.dart';
 import 'package:flutter_app/view/home.dart';
 import 'package:flutter_app/view/login.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_app/view/noti.dart';
 import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
 import 'package:get/get.dart';
+import 'package:flutter_app/utlis/appbar.dart';
 
 import '../controller/auth_controller.dart';
 import '../utlis/custom_animated_bottom_bar.dart';
@@ -25,11 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text("Custom Animated Bottom Navigation Bar"),
-          backgroundColor: Colors.green[200],
-        ),
+        appBar: Navbar(),
         body: getBody(),
         bottomNavigationBar: _buildBottomBar());
   }

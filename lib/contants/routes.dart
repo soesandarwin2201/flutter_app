@@ -6,4 +6,5 @@ class Routes {
   static const String favourite = '/favourite';
   static const String login = '/login';
   static const String signup = '/signup';
+  static const String details = '/productdetails';
 }

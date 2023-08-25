@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/controller/auth_controller.dart';
+import 'package:flutter_app/controller/product_controller.dart';
 import 'package:flutter_app/utlis/app_page.dart';
 import 'package:flutter_app/view/dashboard.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,10 @@ import 'contants/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  await Firebase.initializeApp().then((value) {
+    Get.put(AuthController());
+    Get.put(ProductController());
+  });
   runApp(const MyApp());
 }
 
@@ -20,7 +24,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData.light(),
       initialRoute: Routes.dashboard,
       getPages: appRoutes(),
     );
