@@ -18,7 +18,6 @@ dependencies:
   hexcolor:  
   firebase_messaging: ^14.6.5
   logger: 
-  modal_bottom_sheet:
   uuid:
   flutter_spinkit:
 

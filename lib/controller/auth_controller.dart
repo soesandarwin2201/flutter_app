@@ -15,6 +15,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user = Rx<User?>(null);
   FirebaseAuth auth = FirebaseAuth.instance;
+  Rx<UserModel?> userModel = Rx<UserModel?>(null);
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
   String usersCollection = "users";

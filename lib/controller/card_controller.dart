@@ -17,7 +17,7 @@ class CartController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    ever(authController.user, changeCartTotalPrice);
+    ever(authController.userModel, changeCartTotalPrice);
   }
 
   void addProductToCart(ProductModel product) {
@@ -57,18 +57,20 @@ class CartController extends GetxController {
     }
   }
 
-  changeCartTotalPrice(UserModel userModel) {
+  void changeCartTotalPrice(UserModel? userModel) {
     totalCartPrice.value = 0.0;
-    if (userModel.cart.isNotEmpty) {
+    if (userModel != null && userModel.cart.isNotEmpty) {
       userModel.cart.forEach((cartItem) {
         totalCartPrice.value += cartItem.cost;
       });
     }
   }
 
-  bool _isItemAlreadyAdded(ProductModel product) => authController.user.cart
-      .where((item) => item.productId == product.id)
-      .isNotEmpty;
+  bool _isItemAlreadyAdded(ProductModel product) =>
+      authController.userModel.value?.cart
+          ?.where((item) => item.productId == product.id)
+          ?.isNotEmpty ??
+      false;
 
   void decreaseQuantity(CartItemModel item) {
     if (item.quantity == 1) {

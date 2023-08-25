@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/controller/auth_controller.dart';
+import 'package:flutter_app/controller/card_controller.dart';
 import 'package:flutter_app/controller/product_controller.dart';
 import 'package:flutter_app/utlis/app_page.dart';
 import 'package:flutter_app/view/dashboard.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
   await Firebase.initializeApp().then((value) {
     Get.put(AuthController());
     Get.put(ProductController());
+    Get.put(CartController());
   });
   runApp(const MyApp());
 }

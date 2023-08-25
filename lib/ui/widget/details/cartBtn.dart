@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/product_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
+import '../../../controller/card_controller.dart';
 import '../../theme/appColor.dart';
 
 class AddToCart extends StatelessWidget {
-  const AddToCart({super.key, required this.product});
+  final cartController = Get.find<CartController>();
+  AddToCart({super.key, required this.product});
 
   final ProductModel product;
   @override
@@ -28,7 +31,9 @@ class AddToCart extends StatelessWidget {
               icon: SvgPicture.asset(
                 "images/add_to_cart.svg",
               ),
-              onPressed: () {},
+              onPressed: () {
+                cartController.addProductToCart(product);
+              },
             ),
           ),
           Expanded(

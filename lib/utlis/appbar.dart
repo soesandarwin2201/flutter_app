@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
 import '../contants/routes.dart';
 import '../ui/theme/appColor.dart';
+import '../ui/widget/shopping-cart/shopping_card.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -29,6 +28,13 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       actions: <Widget>[
         IconButton(
           onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => Container(
+                color: Colors.white,
+                child: ShoppingCartWidget(),
+              ),
+            );
             // Add your onPressed logic here
           },
           icon: Icon(
