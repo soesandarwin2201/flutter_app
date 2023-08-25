@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/contants/app_constants.dart';
 import 'package:flutter_app/controller/auth_controller.dart';
 import 'package:flutter_app/model/cart_item.dart';
 import 'package:flutter_app/model/user.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
+import '../contants/app_constants.dart';
 import '../model/product_model.dart';
 
 class CartController extends GetxController {
   static CartController instance = Get.find();
-  AuthController userController = AuthController.instance;
+  AuthController authController = AuthController.instance;
   RxDouble totalCartPrice = 0.0.obs;
 
   @override
   void onReady() {
     super.onReady();
-    ever(userController.userModel, changeCartTotalPrice);
+    ever(authController.user, changeCartTotalPrice);
   }
 
   void addProductToCart(ProductModel product) {
@@ -26,7 +26,7 @@ class CartController extends GetxController {
         Get.snackbar("Check your cart", "${product.name} is already added");
       } else {
         String itemId = Uuid().toString();
-        userController.updateUserData({
+        authController.updateUserData({
           "cart": FieldValue.arrayUnion([
             {
               "id": itemId,
@@ -49,12 +49,11 @@ class CartController extends GetxController {
 
   void removeCartItem(CartItemModel cartItem) {
     try {
-      userController.updateUserData({
+      authController.updateUserData({
         "cart": FieldValue.arrayRemove([cartItem.toJson()])
       });
     } catch (e) {
       Get.snackbar("Error", "Cannot remove this item");
-      debugPrint(e.message);
     }
   }
 
@@ -62,15 +61,14 @@ class CartController extends GetxController {
     totalCartPrice.value = 0.0;
     if (userModel.cart.isNotEmpty) {
       userModel.cart.forEach((cartItem) {
-        totalCartPrice += cartItem.cost;
+        totalCartPrice.value += cartItem.cost;
       });
     }
   }
 
-  bool _isItemAlreadyAdded(ProductModel product) =>
-      userController.userModel.value.cart
-          .where((item) => item.productId == product.id)
-          .isNotEmpty;
+  bool _isItemAlreadyAdded(ProductModel product) => authController.user.cart
+      .where((item) => item.productId == product.id)
+      .isNotEmpty;
 
   void decreaseQuantity(CartItemModel item) {
     if (item.quantity == 1) {
@@ -78,7 +76,7 @@ class CartController extends GetxController {
     } else {
       removeCartItem(item);
       item.quantity--;
-      userController.updateUserData({
+      authController.updateUserData({
         "cart": FieldValue.arrayUnion([item.toJson()])
       });
     }
@@ -88,7 +86,7 @@ class CartController extends GetxController {
     removeCartItem(item);
     item.quantity++;
     logger.i({"quantity": item.quantity});
-    userController.updateUserData({
+    authController.updateUserData({
       "cart": FieldValue.arrayUnion([item.toJson()])
     });
   }
