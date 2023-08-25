@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/product_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../theme/theme.dart';
+import '../../theme/appColor.dart';
 
 class AddToCart extends StatelessWidget {
   const AddToCart({super.key, required this.product});
@@ -21,13 +21,12 @@ class AddToCart extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               border: Border.all(
-                color: product.color,
+                color: Colors.black,
               ),
             ),
             child: IconButton(
               icon: SvgPicture.asset(
-                "assets/icons/add_to_cart.svg",
-                colorFilter: ColorFilter.mode(product.color, BlendMode.srcIn),
+                "images/add_to_cart.svg",
               ),
               onPressed: () {},
             ),
@@ -39,7 +38,7 @@ class AddToCart extends StatelessWidget {
                 minimumSize: Size(double.infinity, 48),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18)),
-                backgroundColor: product.color,
+                backgroundColor: Colors.black,
               ),
               child: Text(
                 "Buy  Now".toUpperCase(),

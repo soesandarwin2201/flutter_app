@@ -9,6 +9,10 @@ import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
 import 'package:get/get.dart';
 
+import '../model/product_model.dart';
+
+late final ProductModel product;
+
 appRoutes() => [
       GetPage(
         name: Routes.dashboard,
@@ -55,7 +59,7 @@ appRoutes() => [
       GetPage(
         name: Routes.details,
         page: () => ProductDetailPage(
-          product: null,
+          product: product,
         ),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),

@@ -14,13 +14,10 @@ class CounterWithFavBtn extends StatelessWidget {
         CartCounter(),
         Container(
           padding: EdgeInsets.all(8),
-          height: 32,
-          width: 32,
-          decoration: BoxDecoration(
-            color: Color(0xFFFF6464),
-            shape: BoxShape.circle,
+          child: Text(
+            "Size: ${product.size}",
+            style: TextStyle(fontSize: 20),
           ),
-          child: Text("Size: ${product.price}"),
         )
       ],
     );

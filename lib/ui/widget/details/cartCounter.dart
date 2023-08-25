@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/theme.dart';
+import '../../theme/appColor.dart';
 
 class CartCounter extends StatefulWidget {
   @override

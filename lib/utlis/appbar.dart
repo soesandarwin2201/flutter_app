@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
-import '../ui/theme/theme.dart';
+import '../contants/routes.dart';
+import '../ui/theme/appColor.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -20,6 +22,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           size: 25,
         ),
         onPressed: () {
+          Get.toNamed(Routes.dashboard);
           // Add your onPressed logic here
         },
       ),

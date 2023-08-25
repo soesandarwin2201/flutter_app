@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/product_model.dart';
 
-import '../../theme/theme.dart';
+import '../../theme/appColor.dart';
 
 class ProductTitleWithImage extends StatelessWidget {
   const ProductTitleWithImage({super.key, required this.product});
@@ -15,15 +15,15 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Aristocratic Hand Bag",
-            style: TextStyle(color: Colors.white),
+            product.category,
+            style: TextStyle(color: Colors.black),
           ),
           Text(
-            product.title,
+            product.name,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: kDefaultPaddin),
           Row(
@@ -38,7 +38,7 @@ class ProductTitleWithImage extends StatelessWidget {
                           .textTheme
                           .headlineSmall!
                           .copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                              color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -47,7 +47,7 @@ class ProductTitleWithImage extends StatelessWidget {
               Expanded(
                 child: Hero(
                   tag: "${product.id}",
-                  child: Image.asset(
+                  child: Image.network(
                     product.image,
                     fit: BoxFit.fill,
                   ),

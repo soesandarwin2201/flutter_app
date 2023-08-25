@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/product_model.dart';
-import 'package:flutter_app/ui/theme/theme.dart';
+import 'package:flutter_app/ui/theme/appColor.dart';
+import 'package:flutter_app/ui/widget/details/cardImage.dart';
 import 'package:flutter_app/ui/widget/details/cartBtn.dart';
 import 'package:flutter_app/ui/widget/details/ingredient.dart';
 import 'package:flutter_app/utlis/appbar.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_app/utlis/appbar.dart';
 import 'details/cart.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({super.key, required this.product});
+  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
   final ProductModel product;
 
   @override
@@ -56,6 +57,7 @@ class ProductDetailPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                ProductTitleWithImage(product: product)
               ],
             ),
           )

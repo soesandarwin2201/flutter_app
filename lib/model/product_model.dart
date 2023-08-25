@@ -1,3 +1,5 @@
+import 'package:hexcolor/hexcolor.dart';
+
 class ProductModel {
   static const ID = "id";
   static const IMAGE = "image";

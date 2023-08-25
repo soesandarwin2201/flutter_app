@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/product_model.dart';
+import 'package:flutter_app/ui/widget/productDeatils.dart';
 import 'package:flutter_app/utlis/customeText.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.details, arguments: product);
+        Get.to(ProductDetailPage(product: product));
       },
       child: Container(
         decoration: BoxDecoration(
