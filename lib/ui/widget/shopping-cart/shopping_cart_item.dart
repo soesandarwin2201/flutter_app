@@ -9,7 +9,7 @@ class CartItemWidget extends StatelessWidget {
   final cartController = Get.find<CartController>();
   final CartItemModel cartItem;
 
-  const CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
+  CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
