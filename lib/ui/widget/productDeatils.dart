@@ -17,6 +17,7 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.indigo.shade50,
       appBar: Navbar(),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
@@ -40,6 +41,7 @@ class ProductDetailPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
+                      SizedBox(height: kDefaultPaddin / 2),
                       Ingredientcard(product: product),
                       SizedBox(height: kDefaultPaddin / 2),
                       Padding(

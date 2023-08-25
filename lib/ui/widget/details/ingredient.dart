@@ -14,7 +14,7 @@ class Ingredientcard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         SmallCard(
-          image: AssetImage('images/aloe.png'),
+          image: AssetImage('images/aloe1.png'),
           text: product.ingredients,
         ),
         SmallCard(
