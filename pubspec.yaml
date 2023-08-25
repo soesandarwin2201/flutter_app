@@ -16,6 +16,11 @@ dependencies:
   get: ^4.6.5
   flutter_svg:
   hexcolor:  
+  firebase_messaging: ^14.6.5
+  logger: 
+  modal_bottom_sheet:
+  uuid:
+  flutter_spinkit:
 
 dev_dependencies:
   flutter_test:
