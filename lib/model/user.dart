@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app/model/cart_item.dart';
 
+import '../contants/app_constants.dart';
+
 class UserModel {
   static const ID = "id";
   static const EMAIL = "email";
@@ -24,6 +26,7 @@ class UserModel {
 
   List<CartItemModel> _convertCartItems(List cartFomDb) {
     List<CartItemModel> _result = [];
+    logger.i(cartFomDb.length);
     if (cartFomDb.length > 0) {
       cartFomDb.forEach((element) {
         _result.add(CartItemModel.fromMap(element));
