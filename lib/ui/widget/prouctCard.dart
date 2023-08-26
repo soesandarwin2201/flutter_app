@@ -6,16 +6,23 @@ import 'package:flutter_app/utlis/customeText.dart';
 import 'package:get/get.dart';
 
 import '../../contants/routes.dart';
+import '../../controller/card_controller.dart';
+import '../../model/cart_item.dart';
 
 class ProductCard extends StatelessWidget {
+  final cartController = Get.find<CartController>();
+  final CartItemModel cartItem;
   final ProductModel product;
-  const ProductCard({super.key, required this.product});
+  ProductCard({super.key, required this.product, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(ProductDetailPage(product: product));
+        Get.to(ProductDetailPage(
+          product: product,
+          cartItem: cartItem,
+        ));
       },
       child: Container(
         decoration: BoxDecoration(

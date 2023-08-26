@@ -23,12 +23,7 @@ class ProductController extends GetxController {
                   ProductModel.fromMap(item.data() as Map<String, dynamic>),
             )
             .toList();
-
-        print("Number of products: ${productsList.length}");
-        productsList.forEach((product) {
-          print(
-              "Product: ${product.name}, Price: ${product.price} , Size: ${product.size} , category: ${product.category}, ingreident: ${product.ingredients},${product.ingredient1},${product.ingredient2}, ");
-        });
+        productsList.forEach((product) {});
 
         return productsList;
       },

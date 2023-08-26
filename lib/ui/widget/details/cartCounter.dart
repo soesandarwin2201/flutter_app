@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/controller/card_controller.dart';
+import 'package:get/get.dart';
 
+import '../../../model/cart_item.dart';
 import '../../theme/appColor.dart';
 
 class CartCounter extends StatefulWidget {
+  final CartItemModel cartItem; // Added 'final' keyword
+
+  const CartCounter({Key? key, required this.cartItem})
+      : super(key: key); // Used 'super' to pass the key
+
   @override
-  _CartCounterState createState() => _CartCounterState();
+  State<CartCounter> createState() => _CartCounterState();
 }
 
 class _CartCounterState extends State<CartCounter> {
+  final cartController = Get.find<CartController>();
+  late CartItemModel cartItem; // Removed 'final' keyword
   int numOfItems = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    cartItem = widget.cartItem; // Initialize cartItem from widget property
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,11 +41,10 @@ class _CartCounterState extends State<CartCounter> {
               ),
             ),
             onPressed: () {
+              cartController.decreaseQuantity(cartItem);
               setState(() {
                 if (numOfItems > 1) {
-                  setState(() {
-                    numOfItems--;
-                  });
+                  numOfItems--;
                 }
               });
             },
@@ -54,6 +70,7 @@ class _CartCounterState extends State<CartCounter> {
               ),
             ),
             onPressed: () {
+              cartController.increaseQuantity(cartItem);
               setState(() {
                 numOfItems++;
               });

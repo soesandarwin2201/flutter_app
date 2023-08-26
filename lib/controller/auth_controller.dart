@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../contants/app_constants.dart';
+import '../model/cart_item.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -20,6 +21,7 @@ class AuthController extends GetxController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   String usersCollection = "users";
   get user => _user;
+
   bool get isLoggedIn => _user.value != null && auth.currentUser != null;
 
   @override
@@ -112,4 +114,32 @@ class AuthController extends GetxController {
       .doc(_user.value?.uid)
       .snapshots()
       .map((snapshot) => UserModel.fromSnapshot(snapshot));
+
+  Future<List<CartItemModel>> getCartItems() async {
+    String userId = _user.value?.uid ?? "";
+    List<CartItemModel> cartItems = [];
+
+    if (userId.isNotEmpty) {
+      try {
+        DocumentSnapshot userSnapshot = await firebaseFirestore
+            .collection(usersCollection)
+            .doc(userId)
+            .get();
+
+        if (userSnapshot.exists) {
+          Map<String, dynamic> userData =
+              userSnapshot.data() as Map<String, dynamic>;
+          List<dynamic> cartData = userData["cart"] ?? [];
+
+          cartItems = cartData
+              .map((itemData) => CartItemModel.fromMap(itemData))
+              .toList();
+        }
+      } catch (e) {
+        print("Error fetching cart data: $e");
+      }
+    }
+
+    return cartItems;
+  }
 }

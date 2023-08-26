@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/auth_controller.dart';
 import '../../../controller/card_controller.dart';
+import '../../../model/cart_item.dart';
 import '../../../utlis/customBtn.dart';
 import '../../../utlis/customeText.dart';
 import 'shopping_cart_item.dart';
@@ -10,6 +11,7 @@ import 'shopping_cart_item.dart';
 class ShoppingCartWidget extends StatelessWidget {
   final authController = Get.find<AuthController>();
   final cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -30,30 +32,65 @@ class ShoppingCartWidget extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            Obx(() => Column(
-                  children: authController.user.value.cart
-                      .map((cartItem) => CartItemWidget(
-                            cartItem: cartItem,
-                          ))
-                      .toList(),
-                )),
+            FutureBuilder<List<CartItemModel>>(
+              future: authController.getCartItems(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: CustomText(
+                      text: "Error loading cart items",
+                      size: 18,
+                      color: Colors.black,
+                      weight: FontWeight.w400,
+                    ),
+                  );
+                } else {
+                  final cartItems = snapshot.data ?? [];
+
+                  if (cartItems.isEmpty) {
+                    return Center(
+                      child: CustomText(
+                        text: "Your cart is empty.",
+                        size: 18,
+                        color: Colors.black,
+                        weight: FontWeight.w400,
+                      ),
+                    );
+                  }
+
+                  return Column(
+                    children: cartItems
+                        .map((cartItem) => CartItemWidget(
+                              cartItem: cartItem,
+                            ))
+                        .toList(),
+                  );
+                }
+              },
+            ),
           ],
         ),
         Positioned(
-            bottom: 30,
-            child: Container(
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(8),
-                child: Obx(
-                  () => CustomButton(
-                    text:
-                        "Pay (\$${cartController.totalCartPrice.value.toStringAsFixed(2)})",
-                    onTap: () {},
-                    bgColor: Colors.black,
-                    txtColor: Colors.white,
-                    shadowColor: Colors.black,
-                  ),
-                )))
+          bottom: 30,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(8),
+            child: Obx(
+              () => CustomButton(
+                text:
+                    "Pay (\$${cartController.totalCartPrice.value.toStringAsFixed(2)})",
+                onTap: () {},
+                bgColor: Colors.black,
+                txtColor: Colors.white,
+                shadowColor: Colors.black,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

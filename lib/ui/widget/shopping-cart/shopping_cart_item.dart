@@ -12,6 +12,7 @@ class CartItemWidget extends StatelessWidget {
   CartItemWidget({Key? key, required this.cartItem}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print("CartItem: ${cartItem.toJson()}");
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
