@@ -39,6 +39,7 @@ class CartController extends GetxController {
             }
           ])
         });
+        totalCartPrice.value += product.price;
         Get.snackbar("Item added", "${product.name} was added to your cart");
       }
     } catch (e) {
@@ -52,6 +53,7 @@ class CartController extends GetxController {
       authController.updateUserData({
         "cart": FieldValue.arrayRemove([cartItem.toJson()])
       });
+      totalCartPrice.value -= cartItem.cost;
     } catch (e) {
       Get.snackbar("Error", "Cannot remove this item");
     }
@@ -63,6 +65,10 @@ class CartController extends GetxController {
       userModel.cart.forEach((cartItem) {
         totalCartPrice.value += cartItem.cost;
       });
+      print("Total Cart Price: ${totalCartPrice.value}");
+    } else {
+      print(
+          "Total Cart Price: 0.0"); // Print something meaningful for an empty cart
     }
   }
 

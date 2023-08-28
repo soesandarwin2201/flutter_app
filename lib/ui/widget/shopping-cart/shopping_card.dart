@@ -14,6 +14,7 @@ class ShoppingCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Total Cart Price in UI: ${cartController.totalCartPrice.value}");
     return Stack(
       children: [
         ListView(
