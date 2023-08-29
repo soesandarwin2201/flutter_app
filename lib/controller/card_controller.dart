@@ -17,7 +17,10 @@ class CartController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    ever(authController.userModel, changeCartTotalPrice);
+    ever(authController.userModel, (UserModel? userModel) {
+      print("ever callback"); // Add this print statement
+      changeCartTotalPrice(userModel);
+    });
   }
 
   void addProductToCart(ProductModel product) {
@@ -53,7 +56,6 @@ class CartController extends GetxController {
       authController.updateUserData({
         "cart": FieldValue.arrayRemove([cartItem.toJson()])
       });
-      totalCartPrice.value -= cartItem.cost;
     } catch (e) {
       Get.snackbar("Error", "Cannot remove this item");
     }

@@ -62,6 +62,7 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      await _fetchUserData(auth.currentUser!.uid);
     } catch (e) {
       Get.snackbar("About Login", "Login message",
           backgroundColor: Colors.redAccent,
@@ -141,5 +142,18 @@ class AuthController extends GetxController {
     }
 
     return cartItems;
+  }
+
+  Future<void> _fetchUserData(String userId) async {
+    try {
+      DocumentSnapshot userSnapshot =
+          await firebaseFirestore.collection(usersCollection).doc(userId).get();
+
+      if (userSnapshot.exists) {
+        userModel.value = UserModel.fromSnapshot(userSnapshot);
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+    }
   }
 }

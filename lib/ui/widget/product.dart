@@ -17,32 +17,32 @@ class Products extends StatelessWidget {
     final cartController = Get.find<CartController>();
     final authController = Get.find<AuthController>();
 
-    return StreamBuilder<List<ProductModel>>(
-      stream: productController.getAllProducts(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+    return FutureBuilder<List<CartItemModel>>(
+      future: authController.getCartItems(), // Fetch cart items once
+      builder: (context, cartSnapshot) {
+        if (cartSnapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
-        } else if (snapshot.hasError) {
+        } else if (cartSnapshot.hasError) {
           return Center(
-            child: Text("Error loading products"),
-          );
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(
-            child: Text("No products available"),
+            child: Text("Error loading cart items"),
           );
         } else {
-          final products = snapshot.data!;
-          return FutureBuilder<List<CartItemModel>>(
-            future: authController.getCartItems(),
-            builder: (context, cartSnapshot) {
-              if (cartSnapshot.connectionState == ConnectionState.waiting) {
+          final cartItems = cartSnapshot.data!;
+          return StreamBuilder<List<ProductModel>>(
+            stream: productController.getAllProducts(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator();
-              } else if (cartSnapshot.hasError) {
+              } else if (snapshot.hasError) {
                 return Center(
-                  child: Text("Error loading cart items"),
+                  child: Text("Error loading products"),
+                );
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(
+                  child: Text("No products available"),
                 );
               } else {
-                final cartItems = cartSnapshot.data!;
+                final products = snapshot.data!;
                 return GridView.count(
                   crossAxisCount: 1,
                   childAspectRatio: .66,
