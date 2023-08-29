@@ -13,8 +13,6 @@ class ShoppingCartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
     final cartController = Get.find<CartController>();
-
-    print("Total Cart Price in UI: ${cartController.totalCartPrice.value}");
     return Stack(
       children: [
         ListView(
@@ -76,12 +74,6 @@ class ShoppingCartWidget extends StatelessWidget {
               },
             ),
           ],
-        ),
-        ElevatedButton(
-          onPressed: () {
-            cartController.changeCartTotalPrice(authController.userModel.value);
-          },
-          child: Text('Update Total Cart Price Manually'),
         ),
         Positioned(
           bottom: 30,

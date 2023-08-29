@@ -11,14 +11,14 @@ import '../model/product_model.dart';
 
 class CartController extends GetxController {
   static CartController instance = Get.find();
-  AuthController authController = AuthController.instance;
+  final AuthController authController = Get.find();
   RxDouble totalCartPrice = 0.0.obs;
 
   @override
   void onReady() {
     super.onReady();
     ever(authController.userModel, (UserModel? userModel) {
-      print("ever callback"); // Add this print statement
+      print("${userModel?.cart}"); // Add this print statement
       changeCartTotalPrice(userModel);
     });
   }

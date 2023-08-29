@@ -31,10 +31,11 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  _initialScreen(User? user) {
+  _initialScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => MyHomePage());
     } else {
+      await _fetchUserData(user.uid);
       Get.offAll(() => UserProfile());
     }
   }
@@ -62,7 +63,7 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
-      await _fetchUserData(auth.currentUser!.uid);
+      _addUserToFirestore(auth.currentUser!.uid, email);
     } catch (e) {
       Get.snackbar("About Login", "Login message",
           backgroundColor: Colors.redAccent,
