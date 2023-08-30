@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stripe_payment/stripe_payment.dart';
 import 'package:uuid/uuid.dart';
 
+import '../contants/app_constants.dart';
 import '../contants/instance.dart';
 import '../model/payment.dart';
+import '../ui/widget/payment/payment.dart';
 import '../utlis/customeText.dart';
 
 class PaymentsController extends GetxController {
@@ -26,8 +30,7 @@ class PaymentsController extends GetxController {
   }
 
   Future<void> createPaymentMethod() async {
-    StripePayment.setStripeAccount(null);
-    //step 1: add card
+    // Step 1: add card
     PaymentMethod paymentMethod = PaymentMethod();
     paymentMethod = await StripePayment.paymentRequestWithCardForm(
       CardFormPaymentRequest(),
@@ -39,7 +42,6 @@ class PaymentsController extends GetxController {
     paymentMethod != null
         ? processPaymentAsDirectCharge(paymentMethod)
         : _showPaymentFailedAlert();
-    dismissLoadingWidget();
   }
 
   Future<void> processPaymentAsDirectCharge(PaymentMethod paymentMethod) async {
@@ -48,19 +50,21 @@ class PaymentsController extends GetxController {
                 100)
             .toInt();
     //step 2: request to create PaymentIntent, attempt to confirm the payment & return PaymentIntent
-    final response = await Dio()
-        .post('$url?amount=$amount&currency=USD&pm_id=${paymentMethod.id}');
-    print('Now i decode');
+    final response = await Dio().post(
+        '$url?amount=$amount&currency=USD&pm_id=${paymentMethod.id ?? ''}');
+
     if (response.data != null && response.data != 'error') {
       final paymentIntentX = response.data;
       final status = paymentIntentX['paymentIntent']['status'];
       if (status == 'succeeded') {
         StripePayment.completeNativePayRequest();
-        _addToCollection(paymentStatus: status, paymentId: paymentMethod.id);
+        _addToCollection(
+            paymentStatus: status, paymentId: paymentMethod.id ?? '');
         authController.updateUserData({"cart": []});
         Get.snackbar("Success", "Payment succeeded");
       } else {
-        _addToCollection(paymentStatus: status, paymentId: paymentMethod.id);
+        _addToCollection(
+            paymentStatus: status, paymentId: paymentMethod.id ?? '');
       }
     } else {
       //case A
@@ -73,6 +77,9 @@ class PaymentsController extends GetxController {
     Get.defaultDialog(
         content: CustomText(
           text: "Payment failed, try another card",
+          color: Colors.black,
+          size: 20.0,
+          weight: FontWeight.bold,
         ),
         actions: [
           GestureDetector(
@@ -83,6 +90,9 @@ class PaymentsController extends GetxController {
                 padding: const EdgeInsets.all(8.0),
                 child: CustomText(
                   text: "Okay",
+                  color: Colors.black,
+                  size: 20.0,
+                  weight: FontWeight.w600,
                 ),
               ))
         ]);
@@ -92,11 +102,11 @@ class PaymentsController extends GetxController {
     String id = Uuid().v1();
     firebaseFirestore.collection(collection).doc(id).set({
       "id": id,
-      "clientId": userController.userModel.value.id,
+      "clientId": authController.userModel.value?.id ?? "",
       "status": paymentStatus,
       "paymentId": paymentId,
-      "cart": userController.userModel.value.cartItemsToJson(),
-      "amount": cartController.totalCartPrice.value.toStringAsFixed(2),
+      "cart": authController.userModel.value?.cartItemsToJson(),
+      "amount": (cartController.totalCartPrice.value ?? 0.0).toStringAsFixed(2),
       "createdAt": DateTime.now().microsecondsSinceEpoch,
     });
   }
@@ -105,7 +115,7 @@ class PaymentsController extends GetxController {
     payments.clear();
     firebaseFirestore
         .collection(collection)
-        .where("clientId", isEqualTo: userController.userModel.value.id)
+        .where("clientId", isEqualTo: authController.userModel.value?.id)
         .get()
         .then((snapshot) {
       snapshot.docs.forEach((doc) {
@@ -114,7 +124,6 @@ class PaymentsController extends GetxController {
       });
 
       logger.i("length ${payments.length}");
-      dismissLoadingWidget();
       Get.to(() => PaymentsScreen());
     });
   }
