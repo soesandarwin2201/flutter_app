@@ -6,12 +6,18 @@ import 'package:flutter_app/ui/widget/details/cardImage.dart';
 import 'package:flutter_app/ui/widget/details/cartBtn.dart';
 import 'package:flutter_app/ui/widget/details/ingredient.dart';
 import 'package:flutter_app/utlis/appbar.dart';
+import 'package:get/get.dart';
 
+import '../../controller/card_controller.dart';
+import '../../model/cart_item.dart';
 import 'details/cart.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
+  ProductDetailPage({Key? key, required this.product, required this.cartItem})
+      : super(key: key);
   final ProductModel product;
+  final cartController = Get.find<CartController>();
+  final CartItemModel cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,10 @@ class ProductDetailPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: kDefaultPaddin / 2),
-                      CounterWithFavBtn(product: product),
+                      CounterWithFavBtn(
+                        product: product,
+                        cartItem: cartItem,
+                      ),
                       SizedBox(height: kDefaultPaddin / 2),
                       AddToCart(product: product)
                     ],

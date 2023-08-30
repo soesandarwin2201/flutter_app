@@ -1,17 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/user.dart';
+import 'package:flutter_app/ui/widget/loading.dart';
 import 'package:flutter_app/view/dashboard.dart';
 import 'package:flutter_app/view/login.dart';
 import 'package:flutter_app/view/user_profile.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../contants/app_constants.dart';
+import '../model/cart_item.dart';
+
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user = Rx<User?>(null);
   FirebaseAuth auth = FirebaseAuth.instance;
+  Rx<UserModel?> userModel = Rx<UserModel?>(null);
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  String usersCollection = "users";
   get user => _user;
+
   bool get isLoggedIn => _user.value != null && auth.currentUser != null;
 
   @override
@@ -21,10 +31,11 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-  _initialScreen(User? user) {
+  _initialScreen(User? user) async {
     if (user == null) {
       Get.offAll(() => MyHomePage());
     } else {
+      await _fetchUserData(user.uid);
       Get.offAll(() => UserProfile());
     }
   }
@@ -33,6 +44,7 @@ class AuthController extends GetxController {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      _addUserToFirestore(auth.currentUser!.uid, email);
     } catch (e) {
       Get.snackbar("About User", "User message",
           backgroundColor: Colors.redAccent,
@@ -51,6 +63,7 @@ class AuthController extends GetxController {
   void login(String email, password) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      _addUserToFirestore(auth.currentUser!.uid, email);
     } catch (e) {
       Get.snackbar("About Login", "Login message",
           backgroundColor: Colors.redAccent,
@@ -81,5 +94,67 @@ class AuthController extends GetxController {
       idToken: googleAuth.idToken,
     );
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  void _addUserToFirestore(String userId, String email) {
+    firebaseFirestore
+        .collection(usersCollection)
+        .doc(userId)
+        .set({"id": userId, "email": email.trim(), "cart": []});
+  }
+
+  updateUserData(Map<String, dynamic> data) {
+    logger.i("UPDATED");
+    firebaseFirestore
+        .collection(usersCollection)
+        .doc(_user.value?.uid)
+        .update(data);
+  }
+
+  Stream<UserModel> listenToUser() => firebaseFirestore
+      .collection(usersCollection)
+      .doc(_user.value?.uid)
+      .snapshots()
+      .map((snapshot) => UserModel.fromSnapshot(snapshot));
+
+  Future<List<CartItemModel>> getCartItems() async {
+    String userId = _user.value?.uid ?? "";
+    List<CartItemModel> cartItems = [];
+
+    if (userId.isNotEmpty) {
+      try {
+        DocumentSnapshot userSnapshot = await firebaseFirestore
+            .collection(usersCollection)
+            .doc(userId)
+            .get();
+
+        if (userSnapshot.exists) {
+          Map<String, dynamic> userData =
+              userSnapshot.data() as Map<String, dynamic>;
+          List<dynamic> cartData = userData["cart"] ?? [];
+
+          cartItems = cartData
+              .map((itemData) => CartItemModel.fromMap(itemData))
+              .toList();
+        }
+      } catch (e) {
+        print("Error fetching cart data: $e");
+      }
+    }
+
+    return cartItems;
+  }
+
+  Future<void> _fetchUserData(String userId) async {
+    try {
+      DocumentSnapshot userSnapshot =
+          await firebaseFirestore.collection(usersCollection).doc(userId).get();
+
+      if (userSnapshot.exists) {
+        userModel.value = UserModel.fromSnapshot(userSnapshot);
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+    }
   }
 }

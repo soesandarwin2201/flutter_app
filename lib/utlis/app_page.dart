@@ -9,9 +9,11 @@ import 'package:flutter_app/view/signup.dart';
 import 'package:flutter_app/view/user_profile.dart';
 import 'package:get/get.dart';
 
+import '../model/cart_item.dart';
 import '../model/product_model.dart';
 
 late final ProductModel product;
+late final CartItemModel cartItem;
 
 appRoutes() => [
       GetPage(
@@ -60,6 +62,7 @@ appRoutes() => [
         name: Routes.details,
         page: () => ProductDetailPage(
           product: product,
+          cartItem: cartItem,
         ),
         transition: Transition.native,
         transitionDuration: const Duration(microseconds: 400),
